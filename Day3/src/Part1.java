@@ -37,7 +37,7 @@ public class Part1 {
           if (Character.isDigit(schematic[i][j])) {
             int[] startPos = new int[]{i, j};
             numString = new StringBuilder("" + schematic[i][j]);
-            while (j < cols - 1 && Character.isDigit(schematic[i][j+1])) {
+            while (j < cols - 1 && Character.isDigit(schematic[i][j + 1])) {
               numString.append(schematic[i][j + 1]);
               j++;
             }
@@ -48,11 +48,7 @@ public class Part1 {
             int topLeft;
             int topRight;
 
-            if (startPos[1] - 1 < 0) {
-              topLeft = 0;
-            } else {
-              topLeft = startPos[1] - 1;
-            }
+            topLeft = Math.max(startPos[1] - 1, 0);
             if (endPos[1] + 1 >= cols) {
               topRight = cols - 1;
             } else {
@@ -76,6 +72,7 @@ public class Part1 {
                 answer += Integer.parseInt(numString.toString());
               }
             }
+            // After
             if (colAhead < cols) {
               if (checkSpecialChar(i, colAhead, schematic)) {
                 answer += Integer.parseInt(numString.toString());
@@ -86,11 +83,7 @@ public class Part1 {
             int bottomLeft;
             int bottomRight;
 
-            if (startPos[1] - 1 < 0) {
-              bottomLeft = 0;
-            } else {
-              bottomLeft = startPos[1] - 1;
-            }
+            bottomLeft = Math.max(startPos[1] - 1, 0);
             if (endPos[1] + 1 >= cols) {
               bottomRight = cols - 1;
             } else {
