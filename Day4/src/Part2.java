@@ -3,9 +3,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Part1 {
+public class Part2 {
+
   public static void main(String[] args) {
     int answer = 0;
+    ArrayList<Integer> copies = new ArrayList<>();
+    ArrayList<Integer> count = new ArrayList<>();
     try {
       File input = new File("./src/input.txt");
       Scanner reader = new Scanner(input);
@@ -28,16 +31,34 @@ public class Part1 {
           }
         }
 
-        // Checking count and calculating score
-        int count = 0;
+        // Adding number of copies of each card
+        int countNum = 0;
         for (int num : myNumbers) {
           for (int winNum : winningNumbers) {
             if (num == winNum) {
-              count++;
+              countNum++;
             }
           }
         }
-        answer += (int) Math.pow(2, count - 1);
+        copies.add(countNum);
+      }
+
+      // Initializing count of each card
+      for (int i = 0; i < 204; i++) {
+        count.add(1);
+      }
+
+      // Calculates the total number of cards
+      for (int i = 0; i < copies.size(); i++) {
+        int j = i + 1;
+        int endLoop = j + copies.get(i) - 1;
+        for (; j <= endLoop; j++) {
+          count.set(j, count.get(j) + count.get(i));
+        }
+      }
+
+      for (int num : count) {
+        answer += num;
       }
       System.out.println(answer);
     } catch (FileNotFoundException e) {
