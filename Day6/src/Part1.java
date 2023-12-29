@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Part1 {
 
+    // Reads the time and distances from the text file
     public static ArrayList<ArrayList<Integer>> getTimesAndDistances() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("./src/input.txt"));
@@ -18,6 +19,7 @@ public class Part1 {
         }
     }
 
+    // Converts the times and distances into int arrays
     private static ArrayList<ArrayList<Integer>> getValues(String[] timeString, String[] distanceString) {
         ArrayList<Integer> times = new ArrayList<>();
         ArrayList<Integer> distances = new ArrayList<>();
@@ -39,10 +41,12 @@ public class Part1 {
         ArrayList<ArrayList<Integer>> values = getTimesAndDistances();
         int answer = 1;
 
+        // Loop through all times
         for (int i = 0; i < 4; i++) {
             int count = 0;
             int time = values.getFirst().get(i);
             int distance = values.getLast().get(i);
+            // Calculate the distance travelled for each time
             for (int j = 0; j <= time; j++) {
                 int distanceTravelled = j * (time - j);
                 if (distanceTravelled > distance) count++;
