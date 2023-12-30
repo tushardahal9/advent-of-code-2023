@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Part1;
+
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -45,7 +46,7 @@ public class Hand implements Comparable<Hand> {
 
     public int compareHands(Hand o) {
         // Cards and their ranks
-        HashMap<String, Integer> cardRanks = new HashMap<String, Integer>() {{
+        HashMap<String, Integer> cardRanks = new HashMap<>() {{
             put("A", 13);
             put("K", 12);
             put("Q", 11);
@@ -82,23 +83,14 @@ public class Hand implements Comparable<Hand> {
         return bid;
     }
 
-    // Formats the hand into an arraylist
-    public ArrayList<String> toArrayList() {
-        ArrayList<String> handFormat = new ArrayList<>();
-        handFormat.add(hand);
-        handFormat.add(String.valueOf(bid));
-        handFormat.add(String.valueOf(determineRank()));
-        return handFormat;
-    }
-
-    // Compares the ranks to sort the arraylist holding all the hands
+    // Compares the ranks of 2 hands of cards
     public int compareTo(Hand o) {
 
         if (this.determineRank() > o.determineRank()) {
             return 1;
         } else if (this.determineRank() < o.determineRank()) {
             return -1;
-            // If both cards are equal rank, compare the hands to find the higher one
+            // If both cards are equal rank, compare the individual cards to find the higher one
         } else {
             return compareHands(o);
         }
